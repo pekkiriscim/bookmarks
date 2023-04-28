@@ -30,6 +30,10 @@ export default {
         800: "#1D2939",
         900: "#101828",
       },
+
+      black: "#000000",
+
+      white: "#FFFFFF",
     },
 
     fontFamily: {

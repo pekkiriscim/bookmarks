@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  input {
+    @apply h-11 rounded-lg border border-gray-300 px-3.5 py-2.5 text-tmd font-regular text-gray-900 outline-none placeholder:text-gray-500 focus:border-primary-300 focus:ring-4 focus:ring-primary-100;
+  }
+}
