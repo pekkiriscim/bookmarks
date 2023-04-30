@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 
 import InputField from "./InputField";
 import ModalHeader from "./ModalHeader";
@@ -7,8 +7,6 @@ import ModalButton from "./ModalButton";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
-
-export const SignUpContext = createContext(null);
 
 function SignUp() {
   const [signUp, setSignUp] = useState({
@@ -26,7 +24,7 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     setSignUp({ ...signUp, isLoading: true });
@@ -62,53 +60,52 @@ function SignUp() {
   };
 
   return (
-    <SignUpContext.Provider value={{ state: signUp, setState: setSignUp }}>
-      <div className="w-[25rem] p-6">
-        <form onSubmit={handleSubmit} className="grid gap-y-8">
-          <div className="grid gap-y-5">
-            <ModalHeader
-              title="Hemen Kaydol"
-              description="Yer imlerinizi paylaşın, yeni içerikleri keşfedin ve daha önce hiç olmadığı kadar ilham dolu olun!"
+    <div className="w-[25rem] p-6">
+      <form onSubmit={handleSignUp} className="grid gap-y-8">
+        <div className="grid gap-y-5">
+          <ModalHeader
+            title="Hemen Kaydol"
+            description="Yer imlerinizi paylaşın, yeni içerikleri keşfedin ve daha önce hiç olmadığı kadar ilham dolu olun!"
+            avvvatars={signUp.fullName}
+          />
+
+          <div className="grid gap-y-4">
+            <InputField
+              inputID="sign-up-full-name"
+              label="Ad"
+              type="text"
+              placeholder="Adınızı giriniz"
+              hint="Adınız diğer kullanıcılar tarafından görünecektir."
+              min={2}
+              max={50}
+              onChange={handleFullName}
             />
 
-            <div className="grid gap-y-4">
-              <InputField
-                inputID="sign-up-full-name"
-                label="Ad"
-                type="text"
-                placeholder="Adınızı giriniz"
-                hint="Adınız diğer kullanıcılar tarafından görünecektir."
-                min={2}
-                max={50}
-                onChange={handleFullName}
-              />
+            <InputField
+              inputID="sign-up-email"
+              label="E-posta"
+              type="email"
+              placeholder="E-postanızı giriniz"
+              min={5}
+              max={255}
+              onChange={handleEmail}
+            />
 
-              <InputField
-                inputID="sign-up-email"
-                label="E-posta"
-                type="email"
-                placeholder="E-postanızı giriniz"
-                min={5}
-                max={255}
-                onChange={handleEmail}
-              />
-
-              <InputField
-                inputID="sign-up-password"
-                label="Şifre"
-                type="password"
-                placeholder="Bir şifre oluşturun"
-                hint="Şifreniz en az 6 karakter uzunluğunda olmalıdır."
-                min={6}
-                max={128}
-                onChange={handlePassword}
-              />
-            </div>
+            <InputField
+              inputID="sign-up-password"
+              label="Şifre"
+              type="password"
+              placeholder="Bir şifre oluşturun"
+              hint="Şifreniz en az 6 karakter uzunluğunda olmalıdır."
+              min={6}
+              max={128}
+              onChange={handlePassword}
+            />
           </div>
-          <ModalButton isLoading={signUp.isLoading} text="Kaydol" />
-        </form>
-      </div>
-    </SignUpContext.Provider>
+        </div>
+        <ModalButton isLoading={signUp.isLoading} text="Kaydol" />
+      </form>
+    </div>
   );
 }
 
