@@ -7,6 +7,8 @@ import {
   SignOutIcon,
 } from "./Icons";
 
+const tags = ["react", "node-js", "javascript", "css", "html", "typescript"];
+
 function Sidebar() {
   return (
     <div className="flex flex-col justify-between border-r border-gray-200">
@@ -16,6 +18,9 @@ function Sidebar() {
         </div>
         <div className="grid gap-y-1 px-4">
           <NavButton Icon={ExploreIcon} text="Keşfet" />
+          {tags.map((tag, index) => {
+            return <NavButton text={tag} key={index} />;
+          })}
           <NavButton Icon={BookmarksIcon} text="Yer İşaretleri" />
           <NavButton Icon={FavoritesIcon} text="Favoriler" />
         </div>
