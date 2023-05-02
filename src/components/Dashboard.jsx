@@ -10,6 +10,12 @@ import Tag from "../pages/Tag";
 
 export const PageContext = createContext();
 
+const pages = {
+  explore: <Explore />,
+  bookmarks: <Bookmarks />,
+  favorites: <Favorites />,
+};
+
 function Dashboard() {
   const [page, setPage] = useState("explore");
 
@@ -19,14 +25,7 @@ function Dashboard() {
         <Sidebar />
         <div>
           <PageHeader />
-          {page === "explore" && <Explore />}
-          {page === "bookmarks" && <Bookmarks />}
-          {page === "favorites" && <Favorites />}
-          {!(
-            page === "explore" ||
-            page === "bookmarks" ||
-            page === "favorites"
-          ) && <Tag tag={page} />}
+          {pages[page] ? pages[page] : <Tag tag={page} />}
         </div>
       </div>
     </PageContext.Provider>

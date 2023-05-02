@@ -17,12 +17,16 @@ function Sidebar() {
           <Avatar size={2.5} value={"John Doe"} radius={0.5} />
         </div>
         <div className="grid gap-y-1 px-4">
-          <NavButton Icon={ExploreIcon} text="Keşfet" />
+          <NavButton Icon={ExploreIcon} text="Keşfet" route="explore" />
           {tags.map((tag, index) => {
-            return <NavButton text={tag} key={index} />;
+            return <NavButton text={tag} key={index} route={tag} />;
           })}
-          <NavButton Icon={BookmarksIcon} text="Yer İşaretleri" />
-          <NavButton Icon={FavoritesIcon} text="Favoriler" />
+          <NavButton
+            Icon={BookmarksIcon}
+            text="Yer İşaretleri"
+            route="bookmarks"
+          />
+          <NavButton Icon={FavoritesIcon} text="Favoriler" route="favorites" />
         </div>
       </div>
       <div className="grid px-4 pb-8">
