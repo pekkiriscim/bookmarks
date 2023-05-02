@@ -78,3 +78,21 @@ export function SignOutIcon() {
     </svg>
   );
 }
+
+export function AddIcon() {
+  return (
+    <svg
+      className="inline-block h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        className="stroke-white"
+        d="M8 12H16M12 8L12 16"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}

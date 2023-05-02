@@ -6,6 +6,7 @@ import {
   FavoritesIcon,
   SignOutIcon,
 } from "./Icons";
+import AddBookmark from "./AddBookmark";
 
 const tags = ["react", "node-js", "javascript", "css", "html", "typescript"];
 
@@ -15,6 +16,9 @@ function Sidebar() {
       <div className="grid gap-y-6 pt-8">
         <div className=" pl-6">
           <Avatar size={2.5} value={"John Doe"} radius={0.5} />
+        </div>
+        <div className="grid px-4">
+          <AddBookmark />
         </div>
         <div className="grid gap-y-1 px-4">
           <NavButton Icon={ExploreIcon} text="Keşfet" route="explore" />
