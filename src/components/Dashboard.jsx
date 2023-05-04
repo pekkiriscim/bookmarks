@@ -23,7 +23,7 @@ function Dashboard() {
     <PageContext.Provider value={{ page: page, setPage: setPage }}>
       <div className="grid h-full w-full grid-cols-[17.5rem_1fr]">
         <Sidebar />
-        <div>
+        <div className="px-8 pb-12 pt-8">
           <PageHeader />
           {pages[page] ? pages[page] : <Tag tag={page} />}
         </div>
