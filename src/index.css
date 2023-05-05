@@ -19,4 +19,8 @@
   #root {
     @apply h-full w-full;
   }
+
+  .bookmark-card:hover .icon-button {
+    @apply flex;
+  }
 }
