@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import ModalHeader from "./ModalHeader";
 import InputField from "./InputField";
 import ModalButton from "./ModalButton";
+
+import { ModalContext } from "./Dashboard";
 
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -11,13 +13,14 @@ function SignIn() {
   const [signIn, setSignIn] = useState({
     email: "",
     password: "",
-    isLoading: false,
   });
+
+  const { modal, setModal } = useContext(ModalContext);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
 
-    setSignIn({ ...signIn, isLoading: true });
+    setModal({ ...modal, isLoading: true });
 
     await signInWithEmailAndPassword(auth, signIn.email, signIn.password)
       .then((userCredential) => {
@@ -25,7 +28,7 @@ function SignIn() {
 
         console.log(user);
 
-        setSignIn({ ...signIn, isLoading: false });
+        setModal({ ...modal, isLoading: false });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -33,7 +36,7 @@ function SignIn() {
 
         console.log(errorCode, errorMessage);
 
-        setSignIn({ ...signIn, isLoading: false });
+        setModal({ ...modal, isLoading: false });
       });
   };
 
@@ -46,7 +49,7 @@ function SignIn() {
   };
 
   return (
-    <div className="w-[25rem] p-6">
+    <div className="w-[25rem] rounded-xl bg-white p-6">
       <form onSubmit={handleSignIn} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader
@@ -76,7 +79,7 @@ function SignIn() {
             />
           </div>
         </div>
-        <ModalButton isLoading={signIn.isLoading} text="Giriş Yap" />
+        <ModalButton isLoading={modal.isLoading} text="Giriş Yap" />
       </form>
     </div>
   );

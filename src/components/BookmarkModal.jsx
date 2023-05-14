@@ -12,7 +12,7 @@ const badges = [
 
 function BookmarkModal() {
   return (
-    <div className="w-[25rem] p-6">
+    <div className="w-[25rem] rounded-xl bg-white p-6">
       <form onSubmit={null} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader

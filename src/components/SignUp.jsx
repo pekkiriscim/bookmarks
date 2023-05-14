@@ -1,41 +1,49 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import InputField from "./InputField";
 import ModalHeader from "./ModalHeader";
 import ModalButton from "./ModalButton";
 
+import { ModalContext } from "./Dashboard";
+
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 function SignUp() {
   const [signUp, setSignUp] = useState({
     fullName: "",
     email: "",
     password: "",
-    isLoading: false,
   });
 
-  const writeUserData = async (userId, fullName) => {
-    const db = getDatabase();
+  const { modal, setModal } = useContext(ModalContext);
 
-    await set(ref(db, "users/" + userId), {
-      fullName: fullName,
-    });
+  const updateDisplayName = async () => {
+    await updateProfile(auth.currentUser, {
+      displayName: signUp.fullName,
+    })
+      .then(() => {
+        console.log("Profile updated!");
+      })
+      .catch((error) => {
+        console.log("An error occurred.", error);
+      });
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    setSignUp({ ...signUp, isLoading: true });
+    setModal({ ...modal, isLoading: true });
 
     await createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
       .then((userCredential) => {
         const user = userCredential.user;
 
-        writeUserData(user.uid, signUp.fullName);
+        console.log("Signed in.", user);
 
-        setSignUp({ ...signUp, isLoading: false });
+        updateDisplayName();
+
+        setModal({ ...modal, isLoading: false });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -43,7 +51,7 @@ function SignUp() {
 
         console.log(errorCode, errorMessage);
 
-        setSignUp({ ...signUp, isLoading: false });
+        setModal({ ...modal, isLoading: false });
       });
   };
 
@@ -60,7 +68,7 @@ function SignUp() {
   };
 
   return (
-    <div className="w-[25rem] p-6">
+    <div className="w-[25rem] rounded-xl bg-white p-6">
       <form onSubmit={handleSignUp} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader
@@ -103,7 +111,7 @@ function SignUp() {
             />
           </div>
         </div>
-        <ModalButton isLoading={signUp.isLoading} text="Kaydol" />
+        <ModalButton isLoading={modal.isLoading} text="Kaydol" />
       </form>
     </div>
   );
