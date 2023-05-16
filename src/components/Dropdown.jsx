@@ -2,9 +2,8 @@ import { useState } from "react";
 
 import { SearchIcon, TickIcon } from "./Icons";
 
-function Dropdown({ text, label, hint, badges }) {
+function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTags, setSelectedTags] = useState({});
 
   return (
     <div className="dd grid gap-y-1.5">
@@ -25,18 +24,13 @@ function Dropdown({ text, label, hint, badges }) {
         >
           <SearchIcon />
           <span className="ml-2 flex text-tmd font-regular text-gray-500">
-            {Object.keys(selectedTags).length === 0
-              ? text
-              : Object.keys(selectedTags).map((tag, index) => {
-                  return (
-                    <span
-                      key={index}
-                      className="mr-1.5 flex h-6 items-center justify-center rounded-md border border-gray-300 px-[0.5625rem] py-0.5 text-tsm font-medium text-gray-700 last:mr-0"
-                    >
-                      {tag}
-                    </span>
-                  );
-                })}
+            {newBookmark.tag === "" ? (
+              text
+            ) : (
+              <span className="mr-1.5 flex h-6 items-center justify-center rounded-md border border-gray-300 px-[0.5625rem] py-0.5 text-tsm font-medium text-gray-700 last:mr-0">
+                {newBookmark.tag}
+              </span>
+            )}
           </span>
         </button>
         {isOpen && (
@@ -46,28 +40,19 @@ function Dropdown({ text, label, hint, badges }) {
                 <button
                   key={index}
                   className={`flex cursor-pointer items-center justify-between rounded-md py-2.5 pl-2 pr-2.5 text-tmd font-medium text-gray-900 hover:bg-gray-25 ${
-                    selectedTags[element.text] === true && "bg-gray-50"
+                    element.text === newBookmark.tag && "bg-gray-50"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
 
                     const badgeText = e.target.textContent;
+                    setNewBookmark({ ...newBookmark, tag: badgeText });
 
-                    if (badgeText && selectedTags[badgeText]) {
-                      const updatedTags = { ...selectedTags };
-                      delete updatedTags[badgeText];
-
-                      setSelectedTags(updatedTags);
-                    } else if (
-                      Object.keys(selectedTags).length < 3 &&
-                      Object.values(selectedTags).length < 3
-                    ) {
-                      setSelectedTags({ ...selectedTags, [badgeText]: true });
-                    }
+                    setIsOpen(!isOpen);
                   }}
                 >
                   <span>{element.text}</span>
-                  {selectedTags[element.text] === true && (
+                  {element.text === newBookmark.tag && (
                     <span>{<TickIcon />}</span>
                   )}
                 </button>

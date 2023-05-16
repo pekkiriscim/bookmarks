@@ -4,6 +4,8 @@ import ModalHeader from "./ModalHeader";
 import InputField from "./InputField";
 import ModalButton from "./ModalButton";
 
+import { toast } from "sonner";
+
 import { ModalContext } from "./Dashboard";
 
 import { auth } from "../firebase";
@@ -23,20 +25,35 @@ function SignIn() {
     setModal({ ...modal, isLoading: true });
 
     await signInWithEmailAndPassword(auth, signIn.email, signIn.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(() => {
+        setModal({ activeModal: null, isLoading: false });
 
-        console.log(user);
-
-        setModal({ ...modal, isLoading: false });
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Hey!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Seni burada tekrar görmek harika!
+            </span>
+          </div>
+        );
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log(errorCode, errorMessage);
-
         setModal({ ...modal, isLoading: false });
+
+        console.log(error);
+
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Oops!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Giriş yaparken bir hata oluştu. {error.message}
+            </span>
+          </div>
+        );
       });
   };
 

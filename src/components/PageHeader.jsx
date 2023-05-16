@@ -12,7 +12,7 @@ function PageHeader() {
   return (
     <div className="mb-8 flex items-center justify-between">
       <span className="text-dsm font-semibold">{page}</span>
-      {!authState.isLoggedIn && !authState.activeUser && (
+      {!(authState.isLoggedIn && authState.activeUser) && (
         <div className="grid grid-cols-2 gap-x-3">
           <HeaderButton
             text={"Giriş Yap"}

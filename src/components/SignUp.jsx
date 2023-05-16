@@ -4,6 +4,8 @@ import InputField from "./InputField";
 import ModalHeader from "./ModalHeader";
 import ModalButton from "./ModalButton";
 
+import { toast } from "sonner";
+
 import { ModalContext } from "./Dashboard";
 
 import { auth } from "../firebase";
@@ -21,13 +23,7 @@ function SignUp() {
   const updateDisplayName = async () => {
     await updateProfile(auth.currentUser, {
       displayName: signUp.fullName,
-    })
-      .then(() => {
-        console.log("Profile updated!");
-      })
-      .catch((error) => {
-        console.log("An error occurred.", error);
-      });
+    });
   };
 
   const handleSignUp = async (e) => {
@@ -36,22 +32,39 @@ function SignUp() {
     setModal({ ...modal, isLoading: true });
 
     await createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        console.log("Signed in.", user);
-
+      .then(() => {
         updateDisplayName();
 
-        setModal({ ...modal, isLoading: false });
+        setModal({ activeModal: null, isLoading: false });
+
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Merhaba!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Yer işaretlerini paylaşarak diğer kullanıcılarla etkileşimde
+              bulunabilir, yeni içerikler keşfedebilir ve birlikte ilham dolu
+              bir deneyim yaşayabiliriz!
+            </span>
+          </div>
+        );
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log(errorCode, errorMessage);
-
         setModal({ ...modal, isLoading: false });
+
+        console.log(error);
+
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Oops!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Kayıt olurken bir hata oluştu. {error.message}
+            </span>
+          </div>
+        );
       });
   };
 

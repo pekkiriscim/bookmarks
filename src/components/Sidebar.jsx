@@ -12,6 +12,8 @@ import {
   SignOutIcon,
 } from "./Icons";
 
+import { toast } from "sonner";
+
 import { ModalContext, AuthStateContext } from "./Dashboard";
 
 import { auth } from "../firebase";
@@ -28,10 +30,30 @@ function Sidebar() {
       .then(() => {
         setAuthState({ ...authState, isLoggedIn: false });
 
-        console.log("Sign-out successful.");
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Hoşça kal!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Bir dahaki sefere görüşmek üzere!
+            </span>
+          </div>
+        );
       })
       .catch((error) => {
-        console.log("An error happened.", error);
+        console.log(error);
+
+        toast(
+          <div className="flex flex-col">
+            <span className="mb-1 text-tsm font-semibold text-gray-900">
+              Oops!
+            </span>
+            <span className="text-tsm font-regular text-gray-600">
+              Çıkış yaparken bir hata oluştu. {error.message}
+            </span>
+          </div>
+        );
       });
   };
 
