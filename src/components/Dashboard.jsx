@@ -2,6 +2,7 @@ import { useState, createContext, useRef, useEffect } from "react";
 
 import Sidebar from "./Sidebar";
 import PageHeader from "./PageHeader";
+
 import { LoadingIcon } from "./Icons";
 
 import Explore from "../pages/Explore";
@@ -104,7 +105,7 @@ function Dashboard() {
               )}
               <div className="grid h-full w-full grid-cols-[17.5rem_1fr]">
                 <Sidebar />
-                <div className="overflow-auto px-8 pb-12 pt-8">
+                <div className="overflow-auto scroll-smooth px-8 pb-12 pt-8">
                   <PageHeader />
                   {pages[page] ? pages[page] : <Tag tag={page} />}
                 </div>
