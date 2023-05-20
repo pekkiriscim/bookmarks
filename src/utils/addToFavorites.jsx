@@ -15,21 +15,33 @@ export const addToFavorites = async (
 
   setIsUpdatingFavorites(true);
 
-  const favoritesRef = ref(
+  const userFavoritesRef = ref(
     database,
-    `favorites/${authState.activeUser.uid}/${bookmark.id}`
+    `users/${authState.activeUser.uid}/favorites/${bookmark.id}`
   );
-  const likesRef = ref(
+  const userBookmarksRef = ref(
+    database,
+    `users/${authState.activeUser.uid}/bookmarks/${bookmark.id}`
+  );
+  const bookmarkLikesRef = ref(
     database,
     `bookmarks/${bookmark.id}/likes/${authState.activeUser.uid}`
   );
 
-  // eslint-disable-next-line no-unused-vars
-  const { likes, ...bookmarkWithoutLikes } = bookmark;
-
   try {
-    await set(favoritesRef, bookmarkWithoutLikes);
-    await set(likesRef, true);
+    await set(userFavoritesRef, {
+      ...bookmark,
+      likes: { [authState.activeUser.uid]: true },
+    });
+
+    if (bookmark.userId === authState.activeUser.uid) {
+      await set(userBookmarksRef, {
+        ...bookmark,
+        likes: { [authState.activeUser.uid]: true },
+      });
+    }
+
+    await set(bookmarkLikesRef, true);
 
     setIsUpdatingFavorites(false);
 

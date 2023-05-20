@@ -5,6 +5,7 @@ import Textarea from "./Textarea";
 import InputField from "./InputField";
 import ModalButton from "./ModalButton";
 import Dropdown from "./Dropdown";
+import Alert from "./Alert";
 
 import { toast } from "sonner";
 
@@ -39,34 +40,24 @@ function BookmarkModal() {
 
     setModal({ ...modal, isLoading: true });
 
-    const bookmarksRef = ref(database, "bookmarks");
-    const newBookmarkRef = push(bookmarksRef);
+    const bookmarksRef = push(ref(database, "bookmarks"));
 
-    const tagsRef = ref(
-      database,
-      `tags/${newBookmark.tag}/${newBookmarkRef.key}`
-    );
     const userBookmarksRef = ref(
       database,
-      `users/${authState.activeUser.uid}/bookmarks/${newBookmarkRef.key}`
+      `users/${authState.activeUser.uid}/bookmarks/${bookmarksRef.key}`
     );
 
     try {
-      await set(newBookmarkRef, { ...newBookmark, id: newBookmarkRef.key });
-      await set(tagsRef, { ...newBookmark, id: newBookmarkRef.key });
-      await set(userBookmarksRef, { ...newBookmark, id: newBookmarkRef.key });
+      await set(bookmarksRef, { ...newBookmark, id: bookmarksRef.key });
+      await set(userBookmarksRef, { ...newBookmark, id: bookmarksRef.key });
 
       setModal({ activeModal: null, isLoading: false });
 
       toast(
-        <div className="flex flex-col">
-          <span className="mb-1 text-tsm font-semibold text-gray-900">
-            Mükemmel!
-          </span>
-          <span className="text-tsm font-regular text-gray-600">
-            Yer işareti başarıyla eklendi.
-          </span>
-        </div>
+        <Alert
+          title={"Mükemmel!"}
+          description={"Yer işareti başarıyla eklendi."}
+        />
       );
     } catch (error) {
       setModal({ ...modal, isLoading: false });
@@ -74,14 +65,10 @@ function BookmarkModal() {
       console.log(error);
 
       toast(
-        <div className="flex flex-col">
-          <span className="mb-1 text-tsm font-semibold text-gray-900">
-            Oops!
-          </span>
-          <span className="text-tsm font-regular text-gray-600">
-            Yer işareti eklenirken bir hata oluştu. {error.message}
-          </span>
-        </div>
+        <Alert
+          title={"Oops!"}
+          description={`Yer işareti eklenirken bir hata oluştu. ${error.message}`}
+        />
       );
     }
   };
@@ -95,14 +82,10 @@ function BookmarkModal() {
                 e.preventDefault();
 
                 toast(
-                  <div className="flex flex-col">
-                    <span className="mb-1 text-tsm font-semibold text-gray-900">
-                      Etiket Seçin
-                    </span>
-                    <span className="text-tsm font-regular text-gray-600">
-                      Yer işaretiniz için etiket seçin.
-                    </span>
-                  </div>
+                  <Alert
+                    title={"Etiket Seçin"}
+                    description={"Yer işaretiniz için etiket seçin."}
+                  />
                 );
               }
             : handleNewBookmark

@@ -15,18 +15,26 @@ export const deleteFromFavorites = async (
 
   setIsUpdatingFavorites(true);
 
-  const favoritesRef = ref(
+  const userFavoritesRef = ref(
     database,
-    `favorites/${authState.activeUser.uid}/${bookmark.id}`
+    `users/${authState.activeUser.uid}/favorites/${bookmark.id}`
   );
-  const likesRef = ref(
+  const bookmarkLikesRef = ref(
     database,
     `bookmarks/${bookmark.id}/likes/${authState.activeUser.uid}`
   );
+  const userBookmarksRef = ref(
+    database,
+    `users/${authState.activeUser.uid}/bookmarks/${bookmark.id}/likes/${authState.activeUser.uid}`
+  );
 
   try {
-    await set(favoritesRef, null);
-    await set(likesRef, false);
+    await set(userFavoritesRef, null);
+    await set(bookmarkLikesRef, false);
+
+    if (bookmark.userId === authState.activeUser.uid) {
+      await set(userBookmarksRef, false);
+    }
 
     setIsUpdatingFavorites(false);
 

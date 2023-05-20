@@ -16,16 +16,14 @@ export const deleteFromBookmarks = async (
   setIsDeletingFromBookmarks(true);
 
   const bookmarksRef = ref(database, `bookmarks/${bookmark.id}`);
-  const tagsRef = ref(database, `tags/${bookmark.tag}/${bookmark.id}`);
-  const usersBookmarksRef = ref(
+  const userBookmarksRef = ref(
     database,
     `users/${authState.activeUser.uid}/bookmarks/${bookmark.id}`
   );
 
   try {
     await set(bookmarksRef, null);
-    await set(tagsRef, null);
-    await set(usersBookmarksRef, null);
+    await set(userBookmarksRef, null);
 
     setIsDeletingFromBookmarks(false);
 

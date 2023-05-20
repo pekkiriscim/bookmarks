@@ -61,18 +61,20 @@ function BookmarkCard({ bookmark }) {
           <Avatar size={2.5} value={bookmark.userDisplayName} radius={1.25} />
           {authState.isLoggedIn && authState.activeUser && (
             <div className="grid grid-cols-[auto_auto] gap-x-3">
-              <IconButton
-                Icon={DeleteIcon}
-                onClick={async (e) => {
-                  await deleteFromBookmarks(
-                    e,
-                    setIsDeletingFromBookmarks,
-                    bookmark,
-                    authState
-                  );
-                }}
-                isLoading={isDeletingFromBookmarks}
-              />
+              {bookmark.userId === authState.activeUser.uid && (
+                <IconButton
+                  Icon={DeleteIcon}
+                  onClick={async (e) => {
+                    await deleteFromBookmarks(
+                      e,
+                      setIsDeletingFromBookmarks,
+                      bookmark,
+                      authState
+                    );
+                  }}
+                  isLoading={isDeletingFromBookmarks}
+                />
+              )}
               {bookmark.likes &&
               bookmark.likes[authState.activeUser.uid] === true ? (
                 <IconButton

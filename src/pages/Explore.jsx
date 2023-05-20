@@ -19,12 +19,23 @@ function Explore() {
       const data = snapshot.val();
 
       if (data && data !== null) {
-        const bookmarkArray = Object.values(data);
-        bookmarkArray.sort((a, b) => b.timestamp - a.timestamp);
+        const bookmarkArray = [];
 
-        setBookmarks(bookmarkArray);
+        Object.values(data).map((bookmark) => {
+          bookmark.id && bookmarkArray.push(bookmark);
+        });
 
-        setIsExploreLoading(false);
+        if (bookmarkArray.length === 0) {
+          setBookmarks(false);
+
+          setIsExploreLoading(false);
+        } else {
+          bookmarkArray.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+          setBookmarks(bookmarkArray);
+
+          setIsExploreLoading(false);
+        }
       } else {
         setBookmarks(false);
 
@@ -52,7 +63,9 @@ function Explore() {
         />
       ) : (
         bookmarks.map((bookmark) => {
-          return <BookmarkCard key={bookmark.id} bookmark={bookmark} />;
+          if (bookmark.id) {
+            return <BookmarkCard key={bookmark.id} bookmark={bookmark} />;
+          }
         })
       )}
     </div>
