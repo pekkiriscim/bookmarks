@@ -20,7 +20,7 @@ const badges = [
   { text: "javascript", color: "#B54708", backgroundColor: "#FFFAEB" },
 ];
 
-function BookmarkModal() {
+function BookmarkModal({ forwardRef }) {
   const { modal, setModal } = useContext(ModalContext);
   const { authState } = useContext(AuthStateContext);
 
@@ -74,7 +74,10 @@ function BookmarkModal() {
   };
 
   return (
-    <div className="w-[25rem] rounded-xl bg-white p-6">
+    <div
+      className="h-full max-h-[46rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full max-sm:rounded-bl-none max-sm:rounded-br-none"
+      ref={forwardRef}
+    >
       <form
         onSubmit={
           newBookmark.tag === ""

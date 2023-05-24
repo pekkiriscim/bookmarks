@@ -2,6 +2,7 @@ import { useState, createContext, useRef, useEffect } from "react";
 
 import Sidebar from "./Sidebar";
 import PageHeader from "./PageHeader";
+import Alert from "./Alert";
 
 import { LoadingIcon } from "./Icons";
 
@@ -22,11 +23,13 @@ import { onAuthStateChanged } from "firebase/auth";
 export const PageContext = createContext();
 export const ModalContext = createContext();
 export const AuthStateContext = createContext();
+export const MobileSidebarContext = createContext();
 
 function Dashboard() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const [page, setPage] = useState("explore");
   const [modal, setModal] = useState({ activeModal: null, isLoading: false });
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
     activeUser: null,
@@ -54,9 +57,9 @@ function Dashboard() {
   };
 
   const modals = {
-    signUp: <SignUp />,
-    signIn: <SignIn />,
-    bookmark: <BookmarkModal />,
+    signUp: <SignUp forwardRef={modalContainerRef} />,
+    signIn: <SignIn forwardRef={modalContainerRef} />,
+    bookmark: <BookmarkModal forwardRef={modalContainerRef} />,
   };
 
   const pages = {
@@ -84,31 +87,34 @@ function Dashboard() {
                     modal.isLoading
                       ? () => {
                           toast(
-                            <div className="flex flex-col">
-                              <span className="mb-1 text-tsm font-semibold text-gray-900">
-                                Hazırlanıyoruz!
-                              </span>
-                              <span className="text-tsm font-regular text-gray-600">
-                                İlhamla dolu bir deneyim yakında seninle olacak!
-                              </span>
-                            </div>
+                            <Alert
+                              title={"Hazırlanıyoruz!"}
+                              description={
+                                "İlhamla dolu bir deneyim yakında seninle olacak!"
+                              }
+                            />
                           );
                         }
                       : handleModal
                   }
-                  className="absolute flex h-full w-full cursor-pointer items-center justify-center bg-gray-700 bg-opacity-70 backdrop-blur"
+                  className="absolute z-20 flex h-full w-full cursor-pointer items-center justify-center overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-sm:flex-col max-sm:justify-end"
                 >
-                  <div className="cursor-auto" ref={modalContainerRef}>
-                    {modals[modal.activeModal]}
-                  </div>
+                  {modals[modal.activeModal]}
                 </div>
               )}
-              <div className="grid h-full w-full grid-cols-[17.5rem_1fr]">
-                <Sidebar />
-                <div className="overflow-auto scroll-smooth px-8 pb-12 pt-8">
-                  <PageHeader />
-                  {pages[page] ? pages[page] : <Tag tag={page} />}
-                </div>
+              <div className="grid h-full w-full grid-cols-[17.5rem_1fr] max-xl:grid-cols-1">
+                <MobileSidebarContext.Provider
+                  value={{
+                    isMobileSidebarOpen: isMobileSidebarOpen,
+                    setIsMobileSidebarOpen: setIsMobileSidebarOpen,
+                  }}
+                >
+                  <Sidebar />
+                  <div className="h-full overflow-auto scroll-smooth bg-white px-8 pb-12 pt-8 max-xl:px-4 max-xl:pt-4">
+                    <PageHeader />
+                    {pages[page] ? pages[page] : <Tag tag={page} />}
+                  </div>
+                </MobileSidebarContext.Provider>
               </div>
             </>
           )}

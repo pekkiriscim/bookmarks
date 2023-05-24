@@ -15,7 +15,9 @@
 
   html,
   body {
-    @apply h-full w-full;
+    @apply h-full w-full antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

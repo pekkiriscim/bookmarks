@@ -31,8 +31,8 @@ function BookmarkCard({ bookmark }) {
   }, [bookmark]);
 
   return (
-    <div className="bookmark-card flex rounded-2xl p-6 hover:bg-gray-25">
-      <div className="mr-6 h-auto w-[10.5rem] min-w-[10.5rem]">
+    <div className="bookmark-card flex rounded-2xl p-6 hover:bg-gray-25 max-sm:flex-col">
+      <div className="mr-6 h-auto w-[10.5rem] min-w-[10.5rem] max-sm:mb-6 max-sm:mr-0 max-sm:w-full">
         <a href={bookmark.url} target="_blank" rel="noreferrer">
           <img
             className="h-full w-full rounded-lg object-cover"
@@ -60,7 +60,7 @@ function BookmarkCard({ bookmark }) {
         <div className="flex items-center justify-between">
           <Avatar size={2.5} value={bookmark.userDisplayName} radius={1.25} />
           {authState.isLoggedIn && authState.activeUser && (
-            <div className="grid grid-cols-[auto_auto] gap-x-3">
+            <div className="grid grid-flow-col gap-x-3">
               {bookmark.userId === authState.activeUser.uid && (
                 <IconButton
                   Icon={DeleteIcon}

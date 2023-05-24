@@ -228,3 +228,39 @@ export function LoadingIcon({ light }) {
     </svg>
   );
 }
+
+export function MenuIcon() {
+  return (
+    <svg
+      className="inline-block h-6 w-6"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        className="stroke-gray-500"
+        d="M4 12H20M4 19H20M4 5H20"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <svg
+      className="inline-block h-6 w-6"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        className="stroke-gray-500"
+        d="M9.17157 9.1712L14.8284 14.8281M14.8284 9.1712L9.17157 14.8281"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}

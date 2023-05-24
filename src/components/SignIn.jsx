@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 
+import Alert from "./Alert";
 import ModalHeader from "./ModalHeader";
 import InputField from "./InputField";
 import ModalButton from "./ModalButton";
@@ -11,7 +12,7 @@ import { ModalContext } from "./Dashboard";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-function SignIn() {
+function SignIn({ forwardRef }) {
   const [signIn, setSignIn] = useState({
     email: "",
     password: "",
@@ -29,14 +30,10 @@ function SignIn() {
         setModal({ activeModal: null, isLoading: false });
 
         toast(
-          <div className="flex flex-col">
-            <span className="mb-1 text-tsm font-semibold text-gray-900">
-              Hey!
-            </span>
-            <span className="text-tsm font-regular text-gray-600">
-              Seni burada tekrar görmek harika!
-            </span>
-          </div>
+          <Alert
+            title={"Hey!"}
+            description={"Seni burada tekrar görmek harika!"}
+          />
         );
       })
       .catch((error) => {
@@ -45,14 +42,10 @@ function SignIn() {
         console.log(error);
 
         toast(
-          <div className="flex flex-col">
-            <span className="mb-1 text-tsm font-semibold text-gray-900">
-              Oops!
-            </span>
-            <span className="text-tsm font-regular text-gray-600">
-              Giriş yaparken bir hata oluştu. {error.message}
-            </span>
-          </div>
+          <Alert
+            title={"Oops!"}
+            description={`Giriş yaparken bir hata oluştu. ${error.message}`}
+          />
         );
       });
   };
@@ -66,7 +59,10 @@ function SignIn() {
   };
 
   return (
-    <div className="w-[25rem] rounded-xl bg-white p-6">
+    <div
+      className="h-full max-h-[28.5rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full max-sm:rounded-bl-none max-sm:rounded-br-none"
+      ref={forwardRef}
+    >
       <form onSubmit={handleSignIn} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader

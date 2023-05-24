@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 
+import Alert from "./Alert";
 import InputField from "./InputField";
 import ModalHeader from "./ModalHeader";
 import ModalButton from "./ModalButton";
@@ -11,7 +12,7 @@ import { ModalContext } from "./Dashboard";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-function SignUp() {
+function SignUp({ forwardRef }) {
   const [signUp, setSignUp] = useState({
     fullName: "",
     email: "",
@@ -38,16 +39,12 @@ function SignUp() {
         setModal({ activeModal: null, isLoading: false });
 
         toast(
-          <div className="flex flex-col">
-            <span className="mb-1 text-tsm font-semibold text-gray-900">
-              Merhaba!
-            </span>
-            <span className="text-tsm font-regular text-gray-600">
-              Yer işaretlerini paylaşarak diğer kullanıcılarla etkileşimde
-              bulunabilir, yeni içerikler keşfedebilir ve birlikte ilham dolu
-              bir deneyim yaşayabiliriz!
-            </span>
-          </div>
+          <Alert
+            title={"Merhaba!"}
+            description={`Yer işaretlerini paylaşarak diğer kullanıcılarla etkileşimde
+        bulunabilir, yeni içerikler keşfedebilir ve birlikte ilham dolu
+        bir deneyim yaşayabiliriz!`}
+          />
         );
       })
       .catch((error) => {
@@ -56,14 +53,10 @@ function SignUp() {
         console.log(error);
 
         toast(
-          <div className="flex flex-col">
-            <span className="mb-1 text-tsm font-semibold text-gray-900">
-              Oops!
-            </span>
-            <span className="text-tsm font-regular text-gray-600">
-              Kayıt olurken bir hata oluştu. {error.message}
-            </span>
-          </div>
+          <Alert
+            title={"Oops!"}
+            description={`Kayıt olurken bir hata oluştu. ${error.message}`}
+          />
         );
       });
   };
@@ -81,7 +74,10 @@ function SignUp() {
   };
 
   return (
-    <div className="w-[25rem] rounded-xl bg-white p-6">
+    <div
+      className="h-full max-h-[35.875rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full max-sm:rounded-bl-none max-sm:rounded-br-none"
+      ref={forwardRef}
+    >
       <form onSubmit={handleSignUp} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader

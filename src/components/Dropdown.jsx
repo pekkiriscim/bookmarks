@@ -6,7 +6,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="dd grid gap-y-1.5">
+    <div className="grid gap-y-1.5">
       <label
         className="text-tsm font-medium text-gray-700"
         onClick={() => setIsOpen(!isOpen)}
@@ -15,6 +15,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
       </label>
       <div className="relative flex flex-col">
         <button
+          type="button"
           className="dropdown-button relative flex h-11 w-full items-center rounded-lg border border-gray-300 px-3.5 py-2.5 outline-none focus:border-primary-300 focus:ring-4 focus:ring-primary-100"
           onClick={(e) => {
             e.preventDefault();
