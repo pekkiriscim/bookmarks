@@ -1,19 +1,24 @@
 import { useState, useEffect } from "react";
 
+import { database_request_limit } from "../bookmarks.config";
+
 import BookmarkCard from "../components/BookmarkCard";
 import EmptyState from "../components/EmptyState";
 
 import { LoadingIcon } from "../components/Icons";
 
 import { database } from "../firebase";
-import { ref, onValue, off } from "firebase/database";
+import { ref, onValue, off, query, limitToLast } from "firebase/database";
 
 function Explore() {
   const [isExploreLoading, setIsExploreLoading] = useState(true);
   const [bookmarks, setBookmarks] = useState();
 
   useEffect(() => {
-    const bookmarksRef = ref(database, "bookmarks");
+    const bookmarksRef = query(
+      ref(database, "bookmarks"),
+      limitToLast(database_request_limit)
+    );
 
     onValue(bookmarksRef, (snapshot) => {
       const data = snapshot.val();

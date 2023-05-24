@@ -41,7 +41,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
                 <button
                   key={index}
                   className={`flex cursor-pointer items-center justify-between rounded-md py-2.5 pl-2 pr-2.5 text-tmd font-medium text-gray-900 hover:bg-gray-25 ${
-                    element.text === newBookmark.tag && "bg-gray-50"
+                    element === newBookmark.tag && "bg-gray-50"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -52,10 +52,8 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
                     setIsOpen(!isOpen);
                   }}
                 >
-                  <span>{element.text}</span>
-                  {element.text === newBookmark.tag && (
-                    <span>{<TickIcon />}</span>
-                  )}
+                  <span>{element}</span>
+                  {element === newBookmark.tag && <span>{<TickIcon />}</span>}
                 </button>
               );
             })}

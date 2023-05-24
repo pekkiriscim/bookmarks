@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 
+import { allowed_tags } from "../bookmarks.config";
+
 import ModalHeader from "./ModalHeader";
 import Textarea from "./Textarea";
 import InputField from "./InputField";
@@ -14,11 +16,7 @@ import { ModalContext, AuthStateContext } from "./Dashboard";
 import { database } from "../firebase";
 import { ref, push, set } from "firebase/database";
 
-const badges = [
-  { text: "react", color: "#026AA2", backgroundColor: "#F0F9FF" },
-  { text: "css", color: "#027A48", backgroundColor: "#ECFDF3" },
-  { text: "javascript", color: "#B54708", backgroundColor: "#FFFAEB" },
-];
+const badges = Object.keys(allowed_tags);
 
 function BookmarkModal({ forwardRef }) {
   const { modal, setModal } = useContext(ModalContext);

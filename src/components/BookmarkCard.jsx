@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 
+import { allowed_tags } from "../bookmarks.config";
+
 import Badge from "./Badge";
 import Avatar from "./Avatar";
 import IconButton from "./IconButton";
@@ -13,11 +15,7 @@ import { deleteFromBookmarks } from "../utils/deleteFromBookmarks";
 import { addToFavorites } from "../utils/addToFavorites";
 import { deleteFromFavorites } from "../utils/deleteFromFavorites";
 
-const badges = {
-  react: { color: "#026AA2", backgroundColor: "#F0F9FF" },
-  css: { color: "#027A48", backgroundColor: "#ECFDF3" },
-  javascript: { color: "#B54708", backgroundColor: "#FFFAEB" },
-};
+const badges = allowed_tags;
 
 function BookmarkCard({ bookmark }) {
   const [linkPreview, setLinkPreview] = useState(null);

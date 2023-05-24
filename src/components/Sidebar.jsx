@@ -1,5 +1,7 @@
 import { useContext } from "react";
 
+import { allowed_tags } from "../bookmarks.config";
+
 import Alert from "./Alert";
 import Avatar from "./Avatar";
 import NavButton from "./NavButton";
@@ -20,22 +22,26 @@ import {
   ModalContext,
   AuthStateContext,
   MobileSidebarContext,
+  PageContext,
 } from "./Dashboard";
 
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 
-const tags = ["react", "node-js", "javascript", "css", "html", "typescript"];
+const tags = Object.keys(allowed_tags);
 
 function Sidebar() {
   const { modal, setModal } = useContext(ModalContext);
   const { authState, setAuthState } = useContext(AuthStateContext);
+  const { setPage } = useContext(PageContext);
   const { isMobileSidebarOpen, setIsMobileSidebarOpen } =
     useContext(MobileSidebarContext);
 
   const handleSignOut = async () => {
     await signOut(auth)
       .then(() => {
+        setPage("explore");
+
         setAuthState({ ...authState, isLoggedIn: false });
 
         toast(
@@ -102,11 +108,25 @@ function Sidebar() {
               Icon={BookmarksIcon}
               text="Yer İşaretleri"
               route="bookmarks"
+              onClick={
+                authState.isLoggedIn && authState.activeUser
+                  ? null
+                  : () => {
+                      setModal({ ...modal, activeModal: "signUp" });
+                    }
+              }
             />
             <NavButton
               Icon={FavoritesIcon}
               text="Favoriler"
               route="favorites"
+              onClick={
+                authState.isLoggedIn && authState.activeUser
+                  ? null
+                  : () => {
+                      setModal({ ...modal, activeModal: "signUp" });
+                    }
+              }
             />
           </div>
         </div>
