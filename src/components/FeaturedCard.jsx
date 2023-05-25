@@ -6,8 +6,7 @@ function FeaturedCard() {
           Projeye Katkıda Bulunun
         </span>
         <span className="text-tsm font-regular text-gray-600">
-          Bu proje ücretsiz ve açık kaynaklıdır. Projeyi birlikte geliştirmek
-          için katkıda bulunun.
+          Bu proje açık kaynaklıdır. Birlikte geliştirmek için katkıda bulunun.
         </span>
       </div>
       <a

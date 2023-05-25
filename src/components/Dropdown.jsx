@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { SearchIcon, TickIcon } from "./Icons";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,31 +36,39 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
             )}
           </span>
         </button>
-        {isOpen && (
-          <div className="absolute top-12 grid max-h-80 w-full grid-cols-1 gap-y-1 overflow-auto rounded-lg border border-gray-200 bg-white p-1.5">
-            {badges.map((element, index) => {
-              return (
-                <button
-                  key={index}
-                  className={`flex cursor-pointer items-center justify-between rounded-md py-2.5 pl-2 pr-2.5 text-tmd font-medium text-gray-900 hover:bg-gray-25 ${
-                    element === newBookmark.tag && "bg-gray-50"
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.1, ease: "easeOut" }}
+              className="absolute top-12 grid max-h-80 w-full grid-cols-1 gap-y-1 overflow-auto rounded-lg border border-gray-200 bg-white p-1.5"
+            >
+              {badges.map((element, index) => {
+                return (
+                  <button
+                    key={index}
+                    className={`flex cursor-pointer items-center justify-between rounded-md py-2.5 pl-2 pr-2.5 text-tmd font-medium text-gray-900 hover:bg-gray-25 ${
+                      element === newBookmark.tag && "bg-gray-50"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
 
-                    const badgeText = e.target.textContent;
-                    setNewBookmark({ ...newBookmark, tag: badgeText });
+                      const badgeText = e.target.textContent;
+                      setNewBookmark({ ...newBookmark, tag: badgeText });
 
-                    setIsOpen(!isOpen);
-                  }}
-                >
-                  <span>{element}</span>
-                  {element === newBookmark.tag && <span>{<TickIcon />}</span>}
-                </button>
-              );
-            })}
-          </div>
-        )}
+                      setIsOpen(!isOpen);
+                    }}
+                  >
+                    <span>{element}</span>
+                    {element === newBookmark.tag && <span>{<TickIcon />}</span>}
+                  </button>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       {hint && (
         <span className="text-tsm font-regular text-gray-600">{hint}</span>

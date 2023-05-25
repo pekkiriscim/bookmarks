@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 
 import { allowed_tags } from "../bookmarks.config";
 
@@ -44,6 +44,8 @@ function Sidebar() {
 
         setAuthState({ ...authState, isLoggedIn: false });
 
+        setIsMobileSidebarOpen(false);
+
         toast(
           <Alert
             title={"Hoşça kal!"}
@@ -63,13 +65,23 @@ function Sidebar() {
       });
   };
 
+  const sidebarRef = useRef();
+
+  const handleSidebar = (e) => {
+    if (!sidebarRef.current.contains(e.target)) setIsMobileSidebarOpen(false);
+  };
+
   return (
     <div
-      className={`z-10 h-full w-full overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-xl:absolute ${
+      onClick={handleSidebar}
+      className={`z-10 h-full w-full cursor-pointer overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-xl:absolute ${
         isMobileSidebarOpen ? "max-xl:block" : "max-xl:hidden"
       }`}
     >
-      <div className="flex h-full flex-col justify-between overflow-auto border-r border-gray-200 bg-white max-xl:w-[17.5rem] max-sm:w-full max-sm:max-w-[17.5rem]">
+      <div
+        ref={sidebarRef}
+        className="flex h-full cursor-auto flex-col justify-between overflow-auto border-r border-gray-200 bg-white max-xl:w-[17.5rem] max-sm:w-full max-sm:max-w-[17.5rem]"
+      >
         <div className="mb-6 grid gap-y-6 pt-8">
           <div className="flex px-6">
             {authState.isLoggedIn && authState.activeUser ? (

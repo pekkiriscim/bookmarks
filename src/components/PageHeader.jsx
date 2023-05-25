@@ -17,6 +17,12 @@ function PageHeader() {
   const { authState } = useContext(AuthStateContext);
   const { setIsMobileSidebarOpen } = useContext(MobileSidebarContext);
 
+  const pageTranslations = {
+    explore: "Keşfet",
+    bookmarks: "Yer İşaretleri",
+    favorites: "Favoriler",
+  };
+
   return (
     <div className="mb-8 flex items-center justify-between max-sm:flex-col-reverse">
       <div className="flex items-center max-sm:w-full max-sm:justify-start">
@@ -28,7 +34,9 @@ function PageHeader() {
         >
           <MenuIcon />
         </button>
-        <span className="text-dsm font-semibold">{page}</span>
+        <span className="text-dsm font-semibold">
+          {pageTranslations[page] ? pageTranslations[page] : `#${page}`}
+        </span>
       </div>
       {!(authState.isLoggedIn && authState.activeUser) && (
         <div className="grid grid-cols-2 gap-x-3 max-sm:mb-6 max-sm:w-full">

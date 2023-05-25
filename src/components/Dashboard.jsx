@@ -6,6 +6,8 @@ import Alert from "./Alert";
 
 import { LoadingIcon } from "./Icons";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import Explore from "../pages/Explore";
 import Bookmarks from "../pages/Bookmarks";
 import Favorites from "../pages/Favorites";
@@ -81,27 +83,33 @@ function Dashboard() {
           ) : (
             <>
               <Toaster />
-              {modals[modal.activeModal] && (
-                <div
-                  onClick={
-                    modal.isLoading
-                      ? () => {
-                          toast(
-                            <Alert
-                              title={"Hazırlanıyoruz!"}
-                              description={
-                                "İlhamla dolu bir deneyim yakında seninle olacak!"
-                              }
-                            />
-                          );
-                        }
-                      : handleModal
-                  }
-                  className="absolute z-20 flex h-full w-full cursor-pointer items-center justify-center overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-sm:flex-col max-sm:justify-end"
-                >
-                  {modals[modal.activeModal]}
-                </div>
-              )}
+              <AnimatePresence>
+                {modals[modal.activeModal] && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    onClick={
+                      modal.isLoading
+                        ? () => {
+                            toast(
+                              <Alert
+                                title={"Hazırlanıyoruz!"}
+                                description={
+                                  "İlhamla dolu bir deneyim yakında seninle olacak!"
+                                }
+                              />
+                            );
+                          }
+                        : handleModal
+                    }
+                    className="absolute z-20 flex h-full w-full cursor-pointer items-center justify-center overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-sm:flex-col max-sm:justify-end max-sm:p-4"
+                  >
+                    {modals[modal.activeModal]}
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <div className="grid h-full w-full grid-cols-[17.5rem_1fr] max-xl:grid-cols-1">
                 <MobileSidebarContext.Provider
                   value={{

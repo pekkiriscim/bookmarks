@@ -9,6 +9,8 @@ import ModalButton from "./ModalButton";
 import Dropdown from "./Dropdown";
 import Alert from "./Alert";
 
+import { motion } from "framer-motion";
+
 import { toast } from "sonner";
 
 import { ModalContext, AuthStateContext } from "./Dashboard";
@@ -72,8 +74,12 @@ function BookmarkModal({ forwardRef }) {
   };
 
   return (
-    <div
-      className="h-full max-h-[46rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full max-sm:rounded-bl-none max-sm:rounded-br-none"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="h-full max-h-[46rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full"
       ref={forwardRef}
     >
       <form
@@ -146,7 +152,7 @@ function BookmarkModal({ forwardRef }) {
         </div>
         <ModalButton text="Yer İşareti Ekle" isLoading={modal.isLoading} />
       </form>
-    </div>
+    </motion.div>
   );
 }
 

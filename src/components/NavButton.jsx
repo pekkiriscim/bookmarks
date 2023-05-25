@@ -1,12 +1,15 @@
 import { useContext } from "react";
 
-import { PageContext } from "./Dashboard";
+import { PageContext, MobileSidebarContext } from "./Dashboard";
 
 function NavButton({ Icon, text, route, onClick }) {
   const { page, setPage } = useContext(PageContext);
+  const { setIsMobileSidebarOpen } = useContext(MobileSidebarContext);
 
   const handleClick = () => {
     route && setPage(route);
+
+    setIsMobileSidebarOpen(false);
   };
 
   return (
