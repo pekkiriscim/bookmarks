@@ -2,7 +2,7 @@ import Avvvatars from "avvvatars-react";
 
 function Avatar({ size, value, radius }) {
   return (
-    <div className="flex items-center">
+    <div className="flex select-none items-center">
       <div>
         <Avvvatars size={size} value={value} radius={radius} style="shape" />
       </div>

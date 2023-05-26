@@ -87,7 +87,7 @@ function SignUp({ forwardRef }) {
       <form onSubmit={handleSignUp} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader
-            title="Hemen Kaydol"
+            title="Hemen kaydol"
             description="Yer işaretlerinizi paylaşın, yeni içerikleri keşfedin ve daha önce hiç olmadığı kadar ilham dolu olun!"
             avvvatars={signUp.fullName}
           />

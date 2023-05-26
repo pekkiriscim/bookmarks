@@ -61,7 +61,7 @@ function Explore() {
         </div>
       ) : bookmarks === false ? (
         <EmptyState
-          title={"Burası şu anda bomboş"}
+          title={"Boş bir keşif alanı"}
           description={
             "Şu anda keşfedilecek bir şey bulunmuyor. Yakında burası seni büyüleyecek şekilde dolacak!"
           }

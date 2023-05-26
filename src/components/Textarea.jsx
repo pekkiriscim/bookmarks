@@ -15,7 +15,7 @@ function Textarea({
       </label>
       <textarea
         autoComplete="off"
-        spellCheck="false"
+        spellCheck={false}
         required
         id={inputID}
         placeholder={placeholder}

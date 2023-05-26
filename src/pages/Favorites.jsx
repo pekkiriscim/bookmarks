@@ -52,7 +52,7 @@ function Favorites() {
         </div>
       ) : bookmarks === false ? (
         <EmptyState
-          title={"Favori Partisi Başlamamış!"}
+          title={"Favori partisi başlamamış"}
           description={
             "Favori listenizi renklendirmek için bir tane ekleyin ve partiye katılın!"
           }

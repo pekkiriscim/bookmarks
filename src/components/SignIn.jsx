@@ -72,7 +72,7 @@ function SignIn({ forwardRef }) {
       <form onSubmit={handleSignIn} className="grid gap-y-8">
         <div className="grid gap-y-5">
           <ModalHeader
-            title="Hoş Geldiniz!"
+            title="Hoş geldiniz"
             description="Hesabınıza giriş yapın ve yer işaretlerinizi görüntüleyin, diğer kullanıcılarla paylaşın veya yeni içerikleri keşfedin."
           />
 

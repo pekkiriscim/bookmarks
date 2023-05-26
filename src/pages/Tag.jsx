@@ -56,8 +56,8 @@ function Tag({ tag }) {
         </div>
       ) : bookmarks === false ? (
         <EmptyState
-          title={`${tag} Etiketi İçin Yolculuk Başlasın!`}
-          description={`Bu alanda henüz hiçbir ${tag} etiketli yer işareti bulunmuyor. Paylaşmak için hemen bir tane ekleyebilirsiniz.`}
+          title={"Burası boş gibi"}
+          description={`Bu alanda henüz hiçbir ${tag} etiketli yer işareti bulunmuyor. Hemen bir tane ekleyerek burayı canlandırın!`}
         />
       ) : (
         bookmarks.map((bookmark) => {

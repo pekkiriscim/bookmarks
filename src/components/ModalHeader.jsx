@@ -10,7 +10,7 @@ function ModalHeader({ title, description, avvvatars }) {
   const { modal, setModal } = useContext(ModalContext);
 
   return (
-    <div className="grid gap-y-4">
+    <div className="grid select-none gap-y-4">
       <div className="flex justify-between">
         <Logomark size={3} value={avvvatars && avvvatars} radius={0.5} />
         <button

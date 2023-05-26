@@ -30,7 +30,7 @@ function BookmarkCard({ bookmark }) {
 
   return (
     <div className="bookmark-card flex rounded-2xl p-6 hover:bg-gray-25 max-sm:flex-col">
-      <div className="mr-6 h-auto w-[10.5rem] min-w-[10.5rem] max-sm:mb-6 max-sm:mr-0 max-sm:w-full">
+      <div className="mr-6 h-auto w-[10.5rem] min-w-[10.5rem] select-none max-sm:mb-6 max-sm:mr-0 max-sm:w-full">
         <a href={bookmark.url} target="_blank" rel="noreferrer">
           <img
             className="h-full w-full rounded-lg object-cover"

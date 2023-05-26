@@ -63,7 +63,7 @@ function Bookmarks() {
         </div>
       ) : bookmarks === false ? (
         <EmptyState
-          title={"Nereye Gittiniz?"}
+          title={"Yolculuk başlasın"}
           description={
             "Burada hiçbir şey yok gibi görünüyor! Yer işaretlerinizi ekleyin ve bu bölümde keyifle dolaşın."
           }

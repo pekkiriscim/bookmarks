@@ -18,7 +18,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
       <div className="relative flex flex-col">
         <button
           type="button"
-          className="dropdown-button relative flex h-11 w-full items-center rounded-lg border border-gray-300 px-3.5 py-2.5 outline-none focus:border-primary-300 focus:ring-4 focus:ring-primary-100"
+          className="dropdown-button relative flex h-11 w-full select-none items-center rounded-lg border border-gray-300 px-3.5 py-2.5 outline-none focus:border-primary-300 focus:ring-4 focus:ring-primary-100"
           onClick={(e) => {
             e.preventDefault();
 
@@ -30,7 +30,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
             {newBookmark.tag === "" ? (
               text
             ) : (
-              <span className="mr-1.5 flex h-6 items-center justify-center rounded-md border border-gray-300 px-[0.5625rem] py-0.5 text-tsm font-medium text-gray-700 last:mr-0">
+              <span className="mr-1.5 flex h-6 select-none items-center justify-center rounded-md border border-gray-300 px-[0.5625rem] py-0.5 text-tsm font-medium text-gray-700 last:mr-0">
                 {newBookmark.tag}
               </span>
             )}
@@ -43,7 +43,7 @@ function Dropdown({ text, label, hint, badges, newBookmark, setNewBookmark }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.1, ease: "easeOut" }}
-              className="absolute top-12 grid max-h-80 w-full grid-cols-1 gap-y-1 overflow-auto rounded-lg border border-gray-200 bg-white p-1.5"
+              className="absolute top-12 grid max-h-80 w-full select-none grid-cols-1 gap-y-1 overflow-auto rounded-lg border border-gray-200 bg-white p-1.5"
             >
               {badges.map((element, index) => {
                 return (

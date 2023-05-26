@@ -1,6 +1,6 @@
 function EmptyState({ title, description }) {
   return (
-    <div className="m-auto max-w-[22rem] p-6">
+    <div className="m-auto max-w-[22rem] select-none p-6">
       <div className="mb-5 flex justify-center">
         <svg
           className="inline-block h-12 w-12"

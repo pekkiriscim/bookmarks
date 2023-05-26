@@ -14,6 +14,7 @@ function InputField({
         {label}
       </label>
       <input
+        spellCheck={false}
         autoComplete="off"
         type={type}
         required

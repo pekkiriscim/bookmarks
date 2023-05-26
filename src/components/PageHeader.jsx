@@ -34,7 +34,7 @@ function PageHeader() {
         >
           <MenuIcon />
         </button>
-        <span className="text-dsm font-semibold">
+        <span className="select-none text-dsm font-semibold text-gray-900">
           {pageTranslations[page] ? pageTranslations[page] : `#${page}`}
         </span>
       </div>
