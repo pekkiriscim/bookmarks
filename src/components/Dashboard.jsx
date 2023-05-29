@@ -16,6 +16,7 @@ import Tag from "../pages/Tag";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import BookmarkModal from "./BookmarkModal";
+import DeleteAccount from "./DeleteAccount";
 
 import { Toaster, toast } from "sonner";
 
@@ -62,6 +63,7 @@ function Dashboard() {
     signUp: <SignUp forwardRef={modalContainerRef} />,
     signIn: <SignIn forwardRef={modalContainerRef} />,
     bookmark: <BookmarkModal forwardRef={modalContainerRef} />,
+    deleteAccount: <DeleteAccount forwardRef={modalContainerRef} />,
   };
 
   const pages = {

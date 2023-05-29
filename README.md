@@ -34,8 +34,6 @@ Bookmarks, yer işaretlerinizi paylaşmanızı kolaylaştırırken aynı zamanda
 
 - Kullanıcıların tercihlerine uygun bir deneyim sunmak için koyu tema desteği ekleyin.
 
-- Kullanıcılara hesaplarını silme seçeneği sunacak işlevselliği ekleyin.
-
 ## Firebase Yapılandırması
 
 1. [Firebase Console](https://console.firebase.google.com/)'a gidin.

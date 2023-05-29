@@ -101,7 +101,7 @@ function BookmarkModal({ forwardRef }) {
       >
         <div className="grid gap-y-5">
           <ModalHeader
-            title="Yer İşareti Ekleyin"
+            title="Yer işareti ekleyin"
             description="Yeni bir yer işareti ekleyin ve diğerleriyle paylaşın."
           />
           <div className="grid gap-y-4">

@@ -14,6 +14,7 @@ import {
   FavoritesIcon,
   SignOutIcon,
   CloseIcon,
+  DeleteAccountIcon,
 } from "./Icons";
 
 import { toast } from "sonner";
@@ -145,11 +146,20 @@ function Sidebar() {
         <div className="grid gap-y-6 px-4 pb-8">
           <FeaturedCard />
           {authState.isLoggedIn && authState.activeUser && (
-            <NavButton
-              Icon={SignOutIcon}
-              text={"Çıkış Yap"}
-              onClick={handleSignOut}
-            />
+            <div className="grid gap-y-1">
+              <NavButton
+                Icon={DeleteAccountIcon}
+                text={"Hesabı Sil"}
+                onClick={() => {
+                  setModal({ ...modal, activeModal: "deleteAccount" });
+                }}
+              />
+              <NavButton
+                Icon={SignOutIcon}
+                text={"Çıkış Yap"}
+                onClick={handleSignOut}
+              />
+            </div>
           )}
         </div>
       </div>
