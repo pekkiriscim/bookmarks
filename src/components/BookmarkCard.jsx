@@ -34,7 +34,7 @@ function BookmarkCard({ bookmark }) {
         <a href={bookmark.url} target="_blank" rel="noreferrer">
           <img
             className="h-full w-full rounded-lg object-cover"
-            src={linkPreview === null ? "src/assets/bookmark.svg" : linkPreview}
+            src={linkPreview === null ? "/bookmark.svg" : linkPreview}
             alt={bookmark.title}
           />
         </a>
