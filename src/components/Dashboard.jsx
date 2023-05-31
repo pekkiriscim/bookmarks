@@ -33,10 +33,21 @@ function Dashboard() {
   const [page, setPage] = useState("explore");
   const [modal, setModal] = useState({ activeModal: null, isLoading: false });
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true" ? true : false
+  );
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
     activeUser: null,
   });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -119,7 +130,7 @@ function Dashboard() {
                     setIsMobileSidebarOpen: setIsMobileSidebarOpen,
                   }}
                 >
-                  <Sidebar />
+                  <Sidebar setDarkMode={setDarkMode} darkMode={darkMode} />
                   <div className="h-full overflow-auto scroll-smooth bg-white px-8 pb-12 pt-8 max-xl:px-4 max-xl:pt-4">
                     <PageHeader />
                     {pages[page] ? pages[page] : <Tag tag={page} />}

@@ -28,10 +28,11 @@ import {
 
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import DarkModeButton from "./DarkModeButton";
 
 const tags = Object.keys(allowed_tags);
 
-function Sidebar() {
+function Sidebar({ setDarkMode, darkMode }) {
   const { modal, setModal } = useContext(ModalContext);
   const { authState, setAuthState } = useContext(AuthStateContext);
   const { setPage } = useContext(PageContext);
@@ -145,6 +146,7 @@ function Sidebar() {
         </div>
         <div className="grid gap-y-6 px-4 pb-8">
           <FeaturedCard />
+          <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
           {authState.isLoggedIn && authState.activeUser && (
             <div className="grid gap-y-1">
               <NavButton
