@@ -29,7 +29,7 @@ function BookmarkCard({ bookmark }) {
   }, [bookmark]);
 
   return (
-    <div className="bookmark-card flex rounded-2xl p-6 hover:bg-gray-25 max-sm:flex-col">
+    <div className="bookmark-card flex rounded-2xl p-6 hover:bg-gray-25 dark:hover:bg-gray-800/10 max-sm:flex-col">
       <div className="mr-6 h-auto w-[10.5rem] min-w-[10.5rem] select-none max-sm:mb-6 max-sm:mr-0 max-sm:w-full">
         <a href={bookmark.url} target="_blank" rel="noreferrer">
           <img
@@ -47,12 +47,17 @@ function BookmarkCard({ bookmark }) {
             backgroundColor={badges[bookmark.tag].backgroundColor}
           />
         </div>
-        <a href={bookmark.url} target="_blank" rel="noreferrer">
-          <span className="mb-2 text-dxs font-semibold text-gray-900">
+        <a
+          className="mr-auto"
+          href={bookmark.url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="mb-2 text-dxs font-semibold text-gray-900 dark:text-white">
             {bookmark.title}
           </span>
         </a>
-        <span className="mb-6 text-tmd font-regular text-gray-600">
+        <span className="mb-6 text-tmd font-regular dark:font-sans text-gray-600 dark:text-white/60">
           {bookmark.description}
         </span>
         <div className="flex items-center justify-between">

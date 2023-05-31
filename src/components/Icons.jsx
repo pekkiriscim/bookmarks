@@ -82,7 +82,7 @@ export function SignOutIcon() {
 export function AddIcon() {
   return (
     <svg
-      className="inline-block h-5 w-5"
+      className="inline-block h-6 w-6"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
