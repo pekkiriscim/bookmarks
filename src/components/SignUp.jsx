@@ -32,6 +32,23 @@ function SignUp({ forwardRef }) {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
+    if (signUp.fullName.length > 20) {
+      return toast(
+        <Alert
+          title={"Hmmmmm!"}
+          description={`İsminiz biraz uzun gibi görünüyor kısaltsak daha iyi olmazmı :(`}
+        />
+      );
+    }
+    if (signUp.email.length > 30) {
+      return toast(
+        <Alert
+          title={"Hmmmmm!"}
+          description={`email adresiniz biraz uzun gibi görünüyor kısaltsak daha iyi olmazmı :(`}
+        />
+      );
+    }
+
     setModal({ ...modal, isLoading: true });
 
     await createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
