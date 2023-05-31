@@ -10,7 +10,10 @@ function Textarea({
 }) {
   return (
     <div className="grid gap-y-1.5">
-      <label htmlFor={inputID} className="text-tsm font-medium text-gray-700">
+      <label
+        htmlFor={inputID}
+        className="text-tsm font-medium text-gray-700 dark:text-white"
+      >
         {label}
       </label>
       <textarea

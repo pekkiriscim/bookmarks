@@ -18,7 +18,7 @@ function ModalHeader({ title, description, avvvatars }) {
         <Logomark size={3} value={avvvatars && avvvatars} radius={0.5} />
         <button
           type="button"
-          className="ml-auto h-11 w-11 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex"
+          className="ml-auto h-11 w-11 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex dark:bg-gray-900 dark:hover:bg-gray-800/20"
           onClick={
             modal.isLoading
               ? () => {
@@ -42,8 +42,10 @@ function ModalHeader({ title, description, avvvatars }) {
         </button>
       </div>
       <div className="grid gap-y-1">
-        <span className="text-tlg font-semibold text-gray-900">{title}</span>
-        <span className="text-tsm font-regular text-gray-600">
+        <span className="text-tlg font-semibold text-gray-900 dark:text-white">
+          {title}
+        </span>
+        <span className="text-tsm font-regular text-gray-600 dark:text-white/70 dark:font-sans">
           {description}
         </span>
       </div>
