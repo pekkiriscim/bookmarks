@@ -46,6 +46,13 @@ function BookmarkCard({ bookmark }) {
             color={badges[bookmark.tag].color}
             backgroundColor={badges[bookmark.tag].backgroundColor}
           />
+          {bookmark.private && (
+            <Badge
+              text="Gizli"
+              color="#B93815"
+              backgroundColor="#FEF6EE"
+            />
+          )}
         </div>
         <a href={bookmark.url} target="_blank" rel="noreferrer">
           <span className="mb-2 text-dxs font-semibold text-gray-900">
@@ -74,7 +81,7 @@ function BookmarkCard({ bookmark }) {
                 />
               )}
               {bookmark.likes &&
-              bookmark.likes[authState.activeUser.uid] === true ? (
+                bookmark.likes[authState.activeUser.uid] === true ? (
                 <IconButton
                   Icon={HeartFilledIcon}
                   onClick={async (e) => {

@@ -27,7 +27,9 @@ function Explore() {
         const bookmarkArray = [];
 
         Object.values(data).map((bookmark) => {
-          bookmark.id && bookmarkArray.push(bookmark);
+          if (!bookmark.private || bookmark.private == false) {
+            bookmark.id && bookmarkArray.push(bookmark);
+          }
         });
 
         if (bookmarkArray.length === 0) {
