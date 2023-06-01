@@ -60,7 +60,8 @@ Bookmarks, yer işaretlerinizi paylaşmanızı kolaylaştırırken aynı zamanda
          "title": "Avvvatars React",
          "url": "https://avvvatars.com/",
          "userDisplayName": "Mustafa",
-         "userId": "user1"
+         "userId": "user1",
+         "private": false
        }
      },
      "users": {
