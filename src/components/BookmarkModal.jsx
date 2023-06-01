@@ -5,6 +5,7 @@ import { allowed_tags } from "../bookmarks.config";
 import ModalHeader from "./ModalHeader";
 import Textarea from "./Textarea";
 import InputField from "./InputField";
+import CheckboxField from "./CheckboxField";
 import ModalButton from "./ModalButton";
 import Dropdown from "./Dropdown";
 import Alert from "./Alert";
@@ -32,6 +33,7 @@ function BookmarkModal({ forwardRef }) {
     userDisplayName: authState.activeUser.displayName,
     userId: authState.activeUser.uid,
     id: "",
+    private: false,
     timestamp: Date.now(),
   });
 
@@ -86,15 +88,15 @@ function BookmarkModal({ forwardRef }) {
         onSubmit={
           newBookmark.tag === ""
             ? (e) => {
-                e.preventDefault();
+              e.preventDefault();
 
-                toast(
-                  <Alert
-                    title={"Etiket Seçin"}
-                    description={"Yer işaretiniz için etiket seçin."}
-                  />
-                );
-              }
+              toast(
+                <Alert
+                  title={"Etiket Seçin"}
+                  description={"Yer işaretiniz için etiket seçin."}
+                />
+              );
+            }
             : handleNewBookmark
         }
         className="grid gap-y-8"
@@ -147,6 +149,16 @@ function BookmarkModal({ forwardRef }) {
               badges={badges}
               newBookmark={newBookmark}
               setNewBookmark={setNewBookmark}
+            />
+
+            <CheckboxField
+              inputID="bookmark-private"
+              label="Özel Yer İşareti"
+              checked={false}
+              hint="Yer işaretinizi sadece siz görebilirsiniz."
+              onChange={(e) => {
+                setNewBookmark({ ...newBookmark, private: e });
+              }}
             />
           </div>
         </div>
