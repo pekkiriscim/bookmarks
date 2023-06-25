@@ -81,7 +81,7 @@ function SignUp({ forwardRef }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="h-full max-h-[35.875rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full"
+      className="h-full max-h-[35.875rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 dark:bg-gray-900 max-sm:w-full max-sm:max-w-full"
       ref={forwardRef}
     >
       <form onSubmit={handleSignUp} className="grid gap-y-8">
