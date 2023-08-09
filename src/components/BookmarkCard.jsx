@@ -56,7 +56,7 @@ function BookmarkCard({ bookmark }) {
           {bookmark.description}
         </span>
         <div className="flex items-center justify-between">
-          <Avatar size={2.5} value={bookmark.userDisplayName} radius={1.25} />
+          <Avatar size={40} value={bookmark.userDisplayName} radius={20} />
           {authState.isLoggedIn && authState.activeUser && (
             <div className="grid grid-flow-col gap-x-3">
               {bookmark.userId === authState.activeUser.uid && (

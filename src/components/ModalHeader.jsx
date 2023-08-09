@@ -15,7 +15,7 @@ function ModalHeader({ title, description, avvvatars }) {
   return (
     <div className="grid select-none gap-y-4">
       <div className="flex justify-between">
-        <Logomark size={3} value={avvvatars && avvvatars} radius={0.5} />
+        <Logomark size={48} value={avvvatars && avvvatars} radius={8} />
         <button
           type="button"
           className="ml-auto h-11 w-11 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex"

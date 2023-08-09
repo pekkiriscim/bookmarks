@@ -2,21 +2,21 @@ import Avvvatars from "avvvatars-react";
 
 function Logomark({ size, value, radius }) {
   return (
-    <div style={{ width: `${size}rem`, height: `${size}rem` }}>
+    <div style={{ width: `${size}px`, height: `${size}px` }}>
       {value && value !== "" ? (
         <Avvvatars value={value} size={size} radius={radius} style="shape" />
       ) : (
         <div
           className="flex items-center justify-center bg-primary-700"
           style={{
-            width: `${size}rem`,
-            height: `${size}rem`,
-            borderRadius: `${radius}rem`,
+            width: `${size}px`,
+            height: `${size}px`,
+            borderRadius: `${radius}px`,
           }}
         >
           <svg
-            width={`${size / 2}rem`}
-            height={`${size / 2}rem`}
+            width={`${size / 2}px`}
+            height={`${size / 2}px`}
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

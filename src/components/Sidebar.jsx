@@ -87,12 +87,12 @@ function Sidebar() {
           <div className="flex px-6">
             {authState.isLoggedIn && authState.activeUser ? (
               <Avatar
-                size={2.5}
+                size={40}
                 value={authState.activeUser.displayName}
-                radius={0.5}
+                radius={8}
               />
             ) : (
-              <Logomark size={2.5} radius={0.5} />
+              <Logomark size={40} radius={8} />
             )}
             <button
               onClick={() => {

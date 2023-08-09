@@ -11,7 +11,7 @@
     "prettier": "npx prettier --write ."
   },
   "dependencies": {
-    "avvvatars-react": "github:pekkiriscim/avvvatars",
+    "avvvatars-react": "^0.4.2",
     "firebase": "^9.21.0",
     "framer-motion": "^10.12.16",
     "react": "^18.2.0",

@@ -28,12 +28,6 @@ Bookmarks, yer işaretlerinizi paylaşmanızı kolaylaştırırken aynı zamanda
 
 - **Tailwind CSS:** Kullanıcı arayüzünün tasarımını oluşturmak için Tailwind CSS kullanılmıştır.
 
-## Yapılacaklar
-
-- Sayfaların meta verileri ile bağlantıların önizlemelerini oluşturma özelliğini ekleyin.
-
-- Kullanıcıların tercihlerine uygun bir deneyim sunmak için koyu tema desteği ekleyin.
-
 ## Firebase Yapılandırması
 
 1. [Firebase Console](https://console.firebase.google.com/)'a gidin.
