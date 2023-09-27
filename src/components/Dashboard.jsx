@@ -33,6 +33,9 @@ function Dashboard() {
   const [page, setPage] = useState("explore");
   const [modal, setModal] = useState({ activeModal: null, isLoading: false });
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true" ? true : false
+  );
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
     activeUser: null,
@@ -51,6 +54,14 @@ function Dashboard() {
       }
     });
   }, [authState.isLoggedIn]);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   const modalContainerRef = useRef();
 
@@ -79,7 +90,7 @@ function Dashboard() {
       <PageContext.Provider value={{ page: page, setPage: setPage }}>
         <ModalContext.Provider value={{ modal: modal, setModal: setModal }}>
           {isAppLoading ? (
-            <div className="absolute flex h-full w-full items-center justify-center bg-white">
+            <div className="absolute flex h-full w-full items-center justify-center bg-white dark:bg-gray-900">
               <LoadingIcon />
             </div>
           ) : (
@@ -106,7 +117,7 @@ function Dashboard() {
                           }
                         : handleModal
                     }
-                    className="absolute z-20 flex h-full w-full cursor-pointer items-center justify-center overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur max-sm:flex-col max-sm:justify-end max-sm:p-4"
+                    className="absolute z-20 flex h-full w-full cursor-pointer items-center justify-center overflow-auto bg-gray-700 bg-opacity-70 backdrop-blur dark:bg-gray-800 dark:bg-opacity-10 max-sm:flex-col max-sm:justify-end max-sm:p-4"
                   >
                     {modals[modal.activeModal]}
                   </motion.div>
@@ -119,8 +130,8 @@ function Dashboard() {
                     setIsMobileSidebarOpen: setIsMobileSidebarOpen,
                   }}
                 >
-                  <Sidebar />
-                  <div className="h-full overflow-auto scroll-smooth bg-white px-8 pb-12 pt-8 max-xl:px-4 max-xl:pt-4">
+                  <Sidebar setDarkMode={setDarkMode} darkMode={darkMode} />
+                  <div className="h-full overflow-auto scroll-smooth bg-white px-8 pb-12 pt-8 dark:bg-gray-900 max-xl:px-4 max-xl:pt-4">
                     <PageHeader />
                     {pages[page] ? pages[page] : <Tag tag={page} />}
                   </div>

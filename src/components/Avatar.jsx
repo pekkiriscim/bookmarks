@@ -6,7 +6,9 @@ function Avatar({ size, value, radius }) {
       <div>
         <Avvvatars size={size} value={value} radius={radius} style="shape" />
       </div>
-      <span className="ml-3 text-tsm font-semibold text-gray-700">{value}</span>
+      <span className="ml-3 text-tsm font-semibold text-gray-700 dark:text-white">
+        {value}
+      </span>
     </div>
   );
 }
