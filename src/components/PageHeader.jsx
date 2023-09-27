@@ -30,7 +30,7 @@ function PageHeader() {
           onClick={() => {
             setIsMobileSidebarOpen(true);
           }}
-          className="mr-3 hidden h-10 w-10 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex"
+          className="mr-3 hidden h-10 w-10 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex dark:hover:bg-gray-800/30"
         >
           <MenuIcon />
         </button>

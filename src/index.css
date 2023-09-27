@@ -30,3 +30,23 @@
     @apply flex;
   }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+body.dark ::-webkit-scrollbar-track {
+  background: #344054;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  background: #1d2939;
+}

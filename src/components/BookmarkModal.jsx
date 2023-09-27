@@ -79,7 +79,7 @@ function BookmarkModal({ forwardRef }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="h-full max-h-[46rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white p-6 max-sm:w-full max-sm:max-w-full"
+      className="h-full max-h-[46rem] max-w-[25rem] cursor-auto overflow-auto rounded-xl bg-white dark:bg-gray-900 p-6 max-sm:w-full max-sm:max-w-full"
       ref={forwardRef}
     >
       <form

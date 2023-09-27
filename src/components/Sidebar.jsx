@@ -28,10 +28,11 @@ import {
 
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import DarkModeButton from "./DarkModeButton";
 
 const tags = Object.keys(allowed_tags);
 
-function Sidebar() {
+function Sidebar({ setDarkMode, darkMode }) {
   const { modal, setModal } = useContext(ModalContext);
   const { authState, setAuthState } = useContext(AuthStateContext);
   const { setPage } = useContext(PageContext);
@@ -81,7 +82,7 @@ function Sidebar() {
     >
       <div
         ref={sidebarRef}
-        className="flex h-full cursor-auto flex-col justify-between overflow-auto border-r border-gray-200 bg-white max-xl:w-[17.5rem] max-sm:w-full max-sm:max-w-[17.5rem]"
+        className="flex h-full cursor-auto flex-col justify-between overflow-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 max-xl:w-[17.5rem] max-sm:w-full max-sm:max-w-[17.5rem]"
       >
         <div className="mb-6 grid gap-y-6 pt-8">
           <div className="flex px-6">
@@ -98,7 +99,7 @@ function Sidebar() {
               onClick={() => {
                 setIsMobileSidebarOpen(false);
               }}
-              className="ml-auto hidden h-10 w-10 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex"
+              className="ml-auto hidden h-10 w-10 items-center justify-center rounded-lg hover:bg-gray-25 max-xl:flex dark:hover:bg-gray-800/30"
             >
               <CloseIcon />
             </button>
@@ -145,6 +146,7 @@ function Sidebar() {
         </div>
         <div className="grid gap-y-6 px-4 pb-8">
           <FeaturedCard />
+          <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
           {authState.isLoggedIn && authState.activeUser && (
             <div className="grid gap-y-1">
               <NavButton
